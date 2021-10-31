@@ -1,6 +1,5 @@
 from sqlalchemy.orm import Session
-
-from . import models, schemas
+from app import models, schemas
 
 
 def get_anime(db: Session, anime_id: int):
