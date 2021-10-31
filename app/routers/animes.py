@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
@@ -20,3 +22,9 @@ def read_anime(anime_id: int, db: Session = Depends(get_db)):
     if db_anime is None:
         raise HTTPException(status_code=404, detail="Anime not found")
     return db_anime
+
+
+@router.get("/animes/", response_model=List[schemas.Anime])
+def read_animes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    animes = crud_anime.get_animes(db, skip=skip, limit=limit)
+    return animes
