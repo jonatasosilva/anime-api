@@ -16,3 +16,10 @@ def get_anime(db: Session, anime_id: int):
 
 def get_animes(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Anime).offset(skip).limit(limit).all()
+
+
+def remove_anime(db: Session, anime_id: int):
+    db_anime = db.query(models.Anime).get(anime_id)
+    db.delete(db_anime)
+    db.commit()
+    return db_anime

@@ -28,3 +28,11 @@ def read_anime(anime_id: int, db: Session = Depends(get_db)):
 def read_animes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     animes = crud_anime.get_animes(db, skip=skip, limit=limit)
     return animes
+
+
+@router.delete("/animes/{anime_id}", response_model=schemas.Anime)
+def delete_anime(anime_id: int, db: Session = Depends(get_db)):
+    anime = crud_anime.get_anime(db, anime_id=anime_id)
+    if not anime:
+        raise HTTPException(status_code=404, detail="Anime not found")
+    return crud_anime.remove_anime(db, anime_id=anime_id)
