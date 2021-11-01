@@ -10,6 +10,10 @@ class AnimeCreate(AnimeBase):
     pass
 
 
+class AnimeUpdate(AnimeBase):
+    pass
+
+
 class Anime(AnimeBase):
     id: int = None
 
