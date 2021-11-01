@@ -1,1 +1,1 @@
-from .anime import Anime, AnimeCreate
+from .anime import Anime, AnimeCreate, AnimeUpdate
